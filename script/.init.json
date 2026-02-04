@@ -1,0 +1,36 @@
+{
+	"main": {
+		"theme": {
+			"color": "rgba(0.70, 0.82, 1.00, 1.00)"
+		}
+	},
+	"start": {
+		"title": {
+			"text": "SeKai",
+			"font_color": "rgba(0.04, 0.39, 0.55, 1.00)",
+			"font_outline_color": "rgba(1.00, 1.00, 1.00, 1.00)",
+			"font_size": 120
+		},
+		"subtitle": {
+			"text": "让世界成为你的舞台",
+			"font_color": "rgba(0.54, 0.65, 0.64, 1.00)",
+			"font_outline_color": "rgba(1.00, 1.00, 1.00, 1.00)",
+			"font_size": 30
+		},
+		"music": {
+			"stream": "思念,交织于世界彼端.mp3",
+			"volume_db": 0.0
+		}
+	},
+	"game": {
+		"script": {
+			"start": "start.txt"
+		}	
+	},
+	"end": {
+		"music": {
+			"stream": "思念,交织于世界彼端.mp3",
+			"volume_db": 0.0
+		}
+	}
+}

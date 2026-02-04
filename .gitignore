@@ -1,0 +1,42 @@
+bin/
+
+# Godot 4+ specific ignores
+.godot/
+.nomedia
+
+# Godot-specific ignores
+.import/
+export.cfg
+export_credentials.cfg
+*.tmp
+
+# Godot Imported translations (automatically generated from CSV files)
+*.translation
+
+# Godot Mono-specific ignores
+.mono/
+data_*/
+mono_crash.*.json
+
+# krita ignores
+*.png~
+*.jpg~
+*.ion~
+
+# note file ignores
+.obsidian/
+vx_notebook/
+vx_attachments/
+vx_recycle_bin/
+vx.json
+**/vx.json
+.klevernotesFolder.metadata.json
+**/.klevernotesFolder.metadata.json
+
+# Special file ignores
+.idea/
+.vscode/
+libaries/
+
+
+
