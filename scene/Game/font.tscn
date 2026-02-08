@@ -34,6 +34,8 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="gui_input" from="." to="." method="_on_text_gui_input"]
+[connection signal="gui_input" from="dialog" to="." method="_on_text_gui_input"]
 [connection signal="gui_input" from="text" to="." method="_on_text_gui_input"]
 [connection signal="meta_clicked" from="text" to="." method="_on_text_meta_clicked"]
 [connection signal="meta_hover_ended" from="text" to="." method="_on_text_meta_hover_ended"]

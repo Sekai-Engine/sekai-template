@@ -32,6 +32,7 @@ public partial class Keys : Control
 				);
 		_backNode.Pressed += OnBackPressed;
 		_historyNode.Pressed += OnHistoryPressed;
+		_settingsNode.Pressed += OnSettingsPressed;
 	}
 
 	public void OnBackPressed()
@@ -42,6 +43,11 @@ public partial class Keys : Control
 	public void OnHistoryPressed()
 	{
 		BackgroundPressed("History");
+	}
+
+	public void OnSettingsPressed()
+	{
+		BackgroundPressed("Settings");
 	}
 
 	public void BackgroundPressed(string scene)
@@ -68,6 +74,10 @@ public partial class Keys : Control
 				case "Technical":
 					_backNode.Show();
 					TechnicalScene.Show();
+					break;
+				case "Settings":
+					_backNode.Show();
+					_settingsScene.Show();
 					break;
 				default:
 					GD.PrintErr($"unexpected scene's type: {scene}");
