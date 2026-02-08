@@ -1,23 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://ds7gwwx2cobnd"]
+[gd_scene load_steps=6 format=3 uid="uid://ds7gwwx2cobnd"]
 
 [ext_resource type="Script" uid="uid://b23yv8b32ghbj" path="res://csharp/Keys/Keys.cs" id="1_2vg48"]
+[ext_resource type="Theme" uid="uid://bagh4xaumjcdf" path="res://theme/UI.tres" id="1_mqe4q"]
 [ext_resource type="PackedScene" uid="uid://tha40r6iwp2i" path="res://scene/Keys/History.tscn" id="2_oh7sh"]
 [ext_resource type="PackedScene" uid="uid://c6f15wney1tmd" path="res://scene/Keys/Technical.tscn" id="3_2vg48"]
+[ext_resource type="PackedScene" uid="uid://bbt5k57er0pi2" path="res://scene/Keys/Settings.tscn" id="5_qdrln"]
 
-[node name="Keys" type="Control" node_paths=PackedStringArray("TechnicalScene", "_backNode", "_historyNode", "_settingsNode", "_boxContainerNode")]
+[node name="Keys" type="Control" node_paths=PackedStringArray("TechnicalScene", "_backNode", "_historyNode", "_settingsNode", "_settingsScene", "_boxContainerNode")]
 layout_mode = 3
 anchors_preset = 0
+theme = ExtResource("1_mqe4q")
 script = ExtResource("1_2vg48")
 TechnicalScene = NodePath("Background/Technical")
 _backNode = NodePath("Background/Back")
 _historyNode = NodePath("BoxContainer/History")
 _settingsNode = NodePath("BoxContainer/Setting")
+_settingsScene = NodePath("Background/Settings")
 _boxContainerNode = NodePath("BoxContainer")
 metadata/_edit_vertical_guides_ = [1506.0]
 metadata/_edit_horizontal_guides_ = [804.0]
 
 [node name="Background" type="ColorRect" parent="."]
-visible = false
 layout_mode = 0
 offset_right = 1536.0
 offset_bottom = 864.0
@@ -40,11 +43,21 @@ grow_horizontal = 1
 grow_vertical = 1
 _keysScene = NodePath("../..")
 
+[node name="Settings" parent="Background" instance=ExtResource("5_qdrln")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 252.0
+offset_bottom = 52.0
+grow_horizontal = 1
+grow_vertical = 1
+
 [node name="Back" type="Button" parent="Background"]
 visible = false
 layout_mode = 0
-offset_left = 1305.0
-offset_top = 776.0
+offset_left = 1371.0
+offset_top = 788.0
 offset_right = 1479.0
 offset_bottom = 833.0
 text = "返回"

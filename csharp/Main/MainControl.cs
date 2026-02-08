@@ -4,10 +4,14 @@ using System;
 public partial class MainControl : CanvasLayer
 {
 	Tween tween;
+	ShaderMaterial shaderMaterial;
+	
 	[Export]
 	private Button _gameStartNode;
 	[Export]
 	private Button _technicalNode;
+	[Export]
+	private Button _settingsNode;
 	[Export]
 	private Button _exitNode;
 	[Export(PropertyHint.FilePath)]
@@ -16,13 +20,21 @@ public partial class MainControl : CanvasLayer
 
 	[Export]
 	public ColorRect Menu { get; set; }
+	private Vector2 _menuPosition;
 	[Export]
 	private Label _start;
 
 	public override void _Ready()
 	{
+		shaderMaterial = (ShaderMaterial)_start.Material;
+		_menuPosition = Menu.Position;
+		GD.Print(_menuPosition);
+		shaderMaterial.SetShaderParameter("min_alpha", 0.3f);
+		shaderMaterial.SetShaderParameter("max_alpha", 1.0f);
+
 		SetJson();
 		_gameStartNode.Pressed += OnGameStartPressed;
+		_settingsNode.Pressed += OnGameSettingsPressed;
 		_technicalNode.Pressed += OnTechnicalPressed;
 		_exitNode.Pressed += OnExitPressed;
 
@@ -58,7 +70,6 @@ public partial class MainControl : CanvasLayer
 	private void InputKey()
 	{
 		tween = GetTree().CreateTween();
-		ShaderMaterial shaderMaterial = (ShaderMaterial)_start.Material;
 		shaderMaterial.SetShaderParameter("min_alpha", 0.0f);
 		shaderMaterial.SetShaderParameter("max_alpha", 0.0f);
 		tween.TweenProperty(Menu, "position", new Vector2(0, 0), 0.6f);
@@ -73,13 +84,17 @@ public partial class MainControl : CanvasLayer
 		GetTree().ChangeSceneToFile(GameScenePath);
 	}
 
+	// 游戏设置
+	void OnGameSettingsPressed()
+	{
+		// 设置功能
+		//Menu.Position = _menuPosition;
+	}
+
 	// 读取字典
 	void OnTechnicalPressed()
 	{
-		/*
-		Global.intptr = 0;
-		GetTree().ChangeSceneToFile("res://scene/game.tscn");
-		*/
+		Menu.Position = _menuPosition;
 	}
 
 	// 退出游戏

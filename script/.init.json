@@ -31,6 +31,10 @@
 		"music": {
 			"stream": "思念,交织于世界彼端.mp3",
 			"volume_db": 0.0
+		},
+		"label": {
+			"text": "Sekai引擎\n让世界成为你的舞台",
+			"speed": 0.1
 		}
 	}
 }

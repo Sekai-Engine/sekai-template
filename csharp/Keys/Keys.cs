@@ -14,6 +14,8 @@ public partial class Keys : Control
 	[Export]
 	private Button _settingsNode;
 	[Export]
+	private Control _settingsScene;
+	[Export]
 	private BoxContainer _boxContainerNode;
 	
 	private static ColorRect _backgroundNode;

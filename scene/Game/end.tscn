@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://dps3t0y1voqpb" path="res://theme/game.tres" id="1_tttng"]
 [ext_resource type="Script" uid="uid://8eo6gg62ynjn" path="res://csharp/Game/End.cs" id="2_l52wm"]
 
-[node name="End" type="Control" node_paths=PackedStringArray("_musicNode", "_endTextureNode")]
+[node name="End" type="Control" node_paths=PackedStringArray("_musicNode", "_endTextureNode", "_richTextLabelNode")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,6 +16,7 @@ theme = ExtResource("1_tttng")
 script = ExtResource("2_l52wm")
 _musicNode = NodePath("Music")
 _endTextureNode = NodePath("Endtexture")
+_richTextLabelNode = NodePath("RichTextLabel")
 
 [node name="Endtexture" type="Sprite2D" parent="."]
 z_index = -1
@@ -26,8 +27,9 @@ centered = false
 autoplay = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-visible = false
 layout_mode = 0
 offset_right = 1537.0
-offset_bottom = 863.0
-text = "你好呀"
+offset_bottom = 59.0
+text = "你好"
+fit_content = true
+horizontal_alignment = 1
