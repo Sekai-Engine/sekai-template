@@ -1,57 +1,74 @@
 using Godot;
 using System;
 
-public partial class Setting : Control
+public partial class Settings : Control
 {
-	private HSlider _volumeSlider;
-	private HSlider _speedSlider;
-	private CheckButton _wholesomeModeCheck;
+	[Export]
+	private HSlider _soundsVolumeSlider;
+	[Export]
+	private HSlider _musicVolumeSlider;
+	[Export]
+	private HSlider _gameVolumeSlider;
+	[Export]
+	private HSlider _speedVolumeSlider;
+	[Export]
+	private CheckButton _friendlyModeCheck;
+	[Export]
 	private CheckButton _autoSaveCheck;
-
+	[Export]
+	private Button _backMainButton;
+	
 	public override void _Ready()
 	{
-		// Get nodes
-		_volumeSlider = GetNode<HSlider>("ScrollContainer/VBoxContainer/VolumeContainer/VolumeSlider");
-		_speedSlider = GetNode<HSlider>("ScrollContainer/VBoxContainer/SpeedContainer/SpeedSlider");
-		_wholesomeModeCheck = GetNode<CheckButton>("ScrollContainer/VBoxContainer/WholesomeModeCheck");
-		_autoSaveCheck = GetNode<CheckButton>("ScrollContainer/VBoxContainer/AutoSaveCheck");
-
 		// Connect signals
-		_volumeSlider.ValueChanged += OnVolumeChanged;
-		_speedSlider.ValueChanged += OnSpeedChanged;
-		_wholesomeModeCheck.Toggled += OnWholesomeModeToggled;
+		_soundsVolumeSlider.ValueChanged += OnSoundsVolumeChanged;
+		_musicVolumeSlider.ValueChanged += OnMusicVolumeChanged;
+		_gameVolumeSlider.ValueChanged += OnGameVolumeChanged;
+		_speedVolumeSlider.ValueChanged += OnSpeedVolumeChanged;
+		_friendlyModeCheck.Toggled += OnFriendlyModeToggled;
 		_autoSaveCheck.Toggled += OnAutoSaveToggled;
+		_backMainButton.Pressed += OnBackMainButtonPressed;
 	}
 
-	private void OnVolumeChanged(double value)
+	private void OnSoundsVolumeChanged(double value)
 	{
 		GD.Print($"Volume changed to: {value}");
-		// Update Master bus volume
-		int busIndex = AudioServer.GetBusIndex("Master");
-		// LinearToDb converts linear volume (0-1) to decibels
-		// Use Mathf.LinearToDb if available or simple conversion
+		int busIndex = AudioServer.GetBusIndex("Sounds");
 		AudioServer.SetBusVolumeDb(busIndex, (float)Mathf.LinearToDb(value));
 	}
 
-	private void OnSpeedChanged(double value)
+	private void OnMusicVolumeChanged(double value)
 	{
-		GD.Print($"Speed changed to: {value}");
-		// Store speed setting
+		GD.Print($"Volume changed to: {value}");
+		int busIndex = AudioServer.GetBusIndex("Music");
+		AudioServer.SetBusVolumeDb(busIndex, (float)Mathf.LinearToDb(value));
 	}
 
-	private void OnWholesomeModeToggled(bool toggled)
+
+	private void OnGameVolumeChanged(double value)
+	{
+		GD.Print($"Volume changed to: {value}");
+		int busIndex = AudioServer.GetBusIndex("Game");
+		AudioServer.SetBusVolumeDb(busIndex, (float)Mathf.LinearToDb(value));
+	}
+
+	private void OnSpeedVolumeChanged(double value)
+	{
+		GD.Print($"Speed changed to: {value}");
+	}
+
+	private void OnFriendlyModeToggled(bool toggled)
 	{
 		GD.Print($"Wholesome Mode: {toggled}");
-		// Store wholesome mode setting
 	}
 
 	private void OnAutoSaveToggled(bool toggled)
 	{
 		GD.Print($"Auto Save: {toggled}");
-		// Store auto save setting
 	}
 
-	public override void _Process(double delta)
+	private void OnBackMainButtonPressed()
 	{
+		GetTree().ChangeSceneToFile("res://scene/Game/main.tscn");	
 	}
 }

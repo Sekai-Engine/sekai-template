@@ -1,17 +1,20 @@
 [gd_scene load_steps=12 format=3 uid="uid://cp6isjvvcti2v"]
 
+[ext_resource type="Script" uid="uid://k3k88k0t7x1x" path="res://csharp/Main/Main.cs" id="1_wjw68"]
 [ext_resource type="Shader" uid="uid://ba5gn7qufqwws" path="res://shader/闪烁.gdshader" id="3_lrosg"]
 [ext_resource type="Theme" uid="uid://bagh4xaumjcdf" path="res://theme/UI.tres" id="4_3mxyr"]
 [ext_resource type="Script" uid="uid://d211kkumcomlp" path="res://csharp/Main/MainControl.cs" id="5_b5f6u"]
 [ext_resource type="Shader" uid="uid://b54gxaaosth46" path="res://shader/侧栏.gdshader" id="5_vil18"]
 [ext_resource type="PackedScene" uid="uid://ds7gwwx2cobnd" path="res://scene/Keys/keys.tscn" id="7_8y3qp"]
 [ext_resource type="FontFile" uid="uid://d4gysf3i5py7b" path="res://font/ChironGoRoundTC-350N.ttf" id="7_qymjl"]
-[ext_resource type="Script" uid="uid://cfohgeer02c8e" path="res://csharp/Keys/Settings.cs" id="8_wjw68"]
 [ext_resource type="AudioStream" uid="uid://d3b6fp2o67rr2" path="res://sounds/button.ogg" id="10_p7wv6"]
 
 [sub_resource type="Curve" id="Curve_tgr4c"]
 _data = [Vector2(0, 0), 0.0, 0.020225, 0, 0, Vector2(0.741071, 0.997541), 0.267722, 0.267722, 0, 0, Vector2(1, 0), -7.89042, 0.0, 0, 0]
 point_count = 3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8wlu8"]
+shader = ExtResource("5_vil18")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wb1fm"]
 shader = ExtResource("3_lrosg")
@@ -19,11 +22,15 @@ shader_parameter/speed = 2.0
 shader_parameter/min_alpha = 0.3
 shader_parameter/max_alpha = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8wlu8"]
-shader = ExtResource("5_vil18")
-
-[node name="Main" type="Node2D"]
-script = ExtResource("8_wjw68")
+[node name="Main" type="Node2D" node_paths=PackedStringArray("_startTextureNode", "_cpuParticles2DNode", "_musicNode", "_soundsNode", "_boxContainer", "_titleNode", "_subTitleNode")]
+script = ExtResource("1_wjw68")
+_startTextureNode = NodePath("StartTexture")
+_cpuParticles2DNode = NodePath("CPUParticles2D")
+_musicNode = NodePath("Music")
+_soundsNode = NodePath("Sounds")
+_boxContainer = NodePath("Menu/BoxContainer")
+_titleNode = NodePath("MainControl/Title/Title")
+_subTitleNode = NodePath("MainControl/Title/Subtitle")
 metadata/_edit_vertical_guides_ = [768.0]
 
 [node name="StartTexture" type="Sprite2D" parent="."]
@@ -48,6 +55,52 @@ max_polyphony = 2
 stream = ExtResource("10_p7wv6")
 max_polyphony = 2
 
+[node name="Menu" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_8wlu8")
+offset_left = -500.0
+offset_right = -75.0
+offset_bottom = 864.0
+color = Color(0.7021535, 0.82848233, 1, 1)
+
+[node name="BoxContainer" type="BoxContainer" parent="Menu"]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 96.0
+offset_right = 400.0
+offset_bottom = 793.0
+theme = ExtResource("4_3mxyr")
+theme_override_constants/separation = 60
+vertical = true
+
+[node name="GameStart" type="Button" parent="Menu/BoxContainer"]
+layout_mode = 2
+text = "开始游戏"
+
+[node name="LoadGame" type="Button" parent="Menu/BoxContainer"]
+visible = false
+layout_mode = 2
+text = "读取存档"
+
+[node name="Technical" type="Button" parent="Menu/BoxContainer"]
+visible = false
+layout_mode = 2
+text = "字	         典"
+
+[node name="Gallery" type="Button" parent="Menu/BoxContainer"]
+visible = false
+layout_mode = 2
+text = "图         集"
+
+[node name="Settings" type="Button" parent="Menu/BoxContainer"]
+layout_mode = 2
+text = "设        置"
+
+[node name="Exit" type="Button" parent="Menu/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme = ExtResource("4_3mxyr")
+text = "退出游戏"
+
 [node name="MainControl" type="CanvasLayer" parent="." node_paths=PackedStringArray("_gameStartNode", "_technicalNode", "_settingsNode", "_exitNode", "Menu", "_start")]
 script = ExtResource("5_b5f6u")
 _gameStartNode = NodePath("../Menu/BoxContainer/GameStart")
@@ -63,7 +116,7 @@ material = SubResource("ShaderMaterial_wb1fm")
 offset_left = 653.0
 offset_top = 728.0
 offset_right = 885.0
-offset_bottom = 762.0
+offset_bottom = 764.0
 theme = ExtResource("4_3mxyr")
 theme_override_colors/font_color = Color(0.7019608, 0.827451, 1, 1)
 text = "-按下任意键开始游戏-"
@@ -104,50 +157,3 @@ horizontal_alignment = 1
 
 [node name="Keys" parent="MainControl" instance=ExtResource("7_8y3qp")]
 visible = false
-
-[node name="Menu" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_8wlu8")
-offset_left = -500.0
-offset_right = -75.0
-offset_bottom = 864.0
-color = Color(0.7021535, 0.82848233, 1, 1)
-script = ExtResource("8_wjw68")
-
-[node name="BoxContainer" type="BoxContainer" parent="Menu"]
-layout_mode = 0
-offset_left = 125.0
-offset_top = 96.0
-offset_right = 400.0
-offset_bottom = 793.0
-theme = ExtResource("4_3mxyr")
-theme_override_constants/separation = 60
-vertical = true
-
-[node name="GameStart" type="Button" parent="Menu/BoxContainer"]
-layout_mode = 2
-text = "开始游戏"
-
-[node name="LoadGame" type="Button" parent="Menu/BoxContainer"]
-visible = false
-layout_mode = 2
-text = "读取存档"
-
-[node name="Technical" type="Button" parent="Menu/BoxContainer"]
-visible = false
-layout_mode = 2
-text = "字	         典"
-
-[node name="Gallery" type="Button" parent="Menu/BoxContainer"]
-visible = false
-layout_mode = 2
-text = "图         集"
-
-[node name="Settings" type="Button" parent="Menu/BoxContainer"]
-layout_mode = 2
-text = "设        置"
-
-[node name="Exit" type="Button" parent="Menu/BoxContainer"]
-layout_mode = 2
-size_flags_vertical = 10
-theme = ExtResource("4_3mxyr")
-text = "退出游戏"
