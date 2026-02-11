@@ -27,11 +27,11 @@ public partial class Technical : Control
 	}
 
 	/* 显示对话框
-	   public new void Show()
-	   {
-	   base.Show();
-	   }
-	   */
+		 public new void Show()
+		 {
+		 base.Show();
+		 }
+		 */
 
 	public void SetSelf(Keys keysScene)
 	{

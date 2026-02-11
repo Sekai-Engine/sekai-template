@@ -5,6 +5,7 @@ public partial class MainControl : CanvasLayer
 {
 	Tween tween;
 	ShaderMaterial shaderMaterial;
+	private Keys _keysScene;
 	
 	[Export]
 	private Button _gameStartNode;
@@ -28,11 +29,15 @@ public partial class MainControl : CanvasLayer
 	{
 		shaderMaterial = (ShaderMaterial)_start.Material;
 		_menuPosition = Menu.Position;
-		GD.Print(_menuPosition);
 		shaderMaterial.SetShaderParameter("min_alpha", 0.3f);
 		shaderMaterial.SetShaderParameter("max_alpha", 1.0f);
 
 		SetJson();
+
+		_keysScene = GetNode<Keys>("Keys");
+		_keysScene.BoxContainerNode.Hide();
+		_keysScene.BackNode.Pressed += InputKey;
+
 		_gameStartNode.Pressed += OnGameStartPressed;
 		_settingsNode.Pressed += OnGameSettingsPressed;
 		_technicalNode.Pressed += OnTechnicalPressed;
@@ -69,6 +74,7 @@ public partial class MainControl : CanvasLayer
 	// 开始游戏的动画.
 	private void InputKey()
 	{
+		_keysScene.Hide();
 		tween = GetTree().CreateTween();
 		shaderMaterial.SetShaderParameter("min_alpha", 0.0f);
 		shaderMaterial.SetShaderParameter("max_alpha", 0.0f);
@@ -88,7 +94,9 @@ public partial class MainControl : CanvasLayer
 	void OnGameSettingsPressed()
 	{
 		// 设置功能
-		//Menu.Position = _menuPosition;
+		Menu.Position = _menuPosition;
+		_keysScene.Show();
+		_keysScene.BackgroundPressed("Settings");
 	}
 
 	// 读取字典

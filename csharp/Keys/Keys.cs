@@ -8,7 +8,7 @@ public partial class Keys : Control
 	[Export]
 	private Game _gameScene;
 	[Export]
-	private Button _backNode;
+	public Button BackNode;
 	[Export]
 	private Button _historyNode;
 	[Export]
@@ -16,22 +16,23 @@ public partial class Keys : Control
 	[Export]
 	private Control _settingsScene;
 	[Export]
-	private BoxContainer _boxContainerNode;
+	public BoxContainer BoxContainerNode;
 	
 	private static ColorRect _backgroundNode;
-	private static History _historyScene;
+	public static History _historyScene;
 	
 	public override void _Ready()
 	{
 		_backgroundNode = GetNode<ColorRect>("Background");
 		_historyScene = GetNode<History>("Background/History");
 
-		_boxContainerNode.Position = new Vector2(
-					Global.window_width - 30 - _boxContainerNode.Size.X,
+		BoxContainerNode.Position = new Vector2(
+					Global.window_width - 30 - BoxContainerNode.Size.X,
 					30
 				);
-		_backNode.Pressed += OnBackPressed;
+		BackNode.Pressed += OnBackPressed;
 		_historyNode.Pressed += OnHistoryPressed;
+		_settingsNode.Pressed += OnSettingsPressed;
 	}
 
 	public void OnBackPressed()
@@ -42,6 +43,11 @@ public partial class Keys : Control
 	public void OnHistoryPressed()
 	{
 		BackgroundPressed("History");
+	}
+
+	public void OnSettingsPressed()
+	{
+		BackgroundPressed("Settings");
 	}
 
 	public void BackgroundPressed(string scene)
@@ -61,13 +67,17 @@ public partial class Keys : Control
 			switch (scene)
 			{
 				case "History":
-					_backNode.Show();
+					BackNode.Show();
 					_historyScene.Show();
 					_historyScene.Text = _historyScene.loadFlowText(_gameScene.Datas);
 					break;
 				case "Technical":
-					_backNode.Show();
+					BackNode.Show();
 					TechnicalScene.Show();
+					break;
+				case "Settings":
+					BackNode.Show();
+					_settingsScene.Show();
 					break;
 				default:
 					GD.PrintErr($"unexpected scene's type: {scene}");

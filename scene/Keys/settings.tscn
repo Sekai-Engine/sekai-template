@@ -1,0 +1,132 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbt5k57er0pi2"]
+
+[ext_resource type="Script" uid="uid://cfohgeer02c8e" path="res://csharp/Keys/Settings.cs" id="1_6nktq"]
+
+[node name="Settings" type="Control" node_paths=PackedStringArray("_soundsVolumeSlider", "_musicVolumeSlider", "_gameVolumeSlider", "_speedVolumeSlider", "_friendlyModeCheck", "_autoSaveCheck", "_backMainButton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6nktq")
+_soundsVolumeSlider = NodePath("ScrollContainer/VBoxContainer/SoundsVolumeContainer/VolumeSlider")
+_musicVolumeSlider = NodePath("ScrollContainer/VBoxContainer/MusicVolumeContainer/VolumeSlider")
+_gameVolumeSlider = NodePath("ScrollContainer/VBoxContainer/GameVolumeContainer/VolumeSlider")
+_speedVolumeSlider = NodePath("ScrollContainer/VBoxContainer/SpeedContainer/SpeedSlider")
+_friendlyModeCheck = NodePath("ScrollContainer/VBoxContainer/FriendlyModeCheck")
+_autoSaveCheck = NodePath("ScrollContainer/VBoxContainer/AutoSaveCheck")
+_backMainButton = NodePath("ScrollContainer/VBoxContainer/BackMainButton")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 1536.0
+offset_bottom = 128.0
+text = "设置"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.016
+anchor_top = 0.148
+anchor_right = 0.984
+anchor_bottom = 0.999
+offset_left = 0.4239998
+offset_top = 0.12799835
+offset_right = -0.42407227
+offset_bottom = -0.13598633
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="SoundsVolumeContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/SoundsVolumeContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "音效音量"
+
+[node name="VolumeSlider" type="HSlider" parent="ScrollContainer/VBoxContainer/SoundsVolumeContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="MusicVolumeContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/MusicVolumeContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "音乐音量"
+
+[node name="VolumeSlider" type="HSlider" parent="ScrollContainer/VBoxContainer/MusicVolumeContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="GameVolumeContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/GameVolumeContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "游戏音量"
+
+[node name="VolumeSlider" type="HSlider" parent="ScrollContainer/VBoxContainer/GameVolumeContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="SpeedContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/SpeedContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "文本速度"
+
+[node name="SpeedSlider" type="HSlider" parent="ScrollContainer/VBoxContainer/SpeedContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.1
+max_value = 5.0
+step = 0.1
+value = 1.0
+
+[node name="FriendlyModeCheck" type="CheckButton" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "保护模式"
+
+[node name="AutoSaveCheck" type="CheckButton" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "自动存档"
+
+[node name="BackMainButton" type="Button" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "回到主菜单"
