@@ -26,6 +26,7 @@ metadata/_edit_vertical_guides_ = [1506.0]
 metadata/_edit_horizontal_guides_ = [804.0]
 
 [node name="Background" type="ColorRect" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 1536.0
 offset_bottom = 864.0
@@ -51,9 +52,11 @@ offset_bottom = 0.0
 _keysScene = NodePath("../..")
 
 [node name="Settings" parent="Background" instance=ExtResource("5_qdrln")]
+visible = false
 layout_mode = 1
 
 [node name="Back" type="Button" parent="Background"]
+visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
