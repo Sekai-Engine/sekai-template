@@ -53,10 +53,23 @@ public partial class Technical : Control
 	{
 		if (FlowData.Techdata.Count == 0)
 		{
-			string[] files = Directory.GetFiles("./technical/");
-			foreach (string file in files)
+			using var dir = DirAccess.Open("res://technical");
+			if (dir != null)
 			{
-				SetLabel(file);
+				dir.ListDirBegin();
+				string fileName = dir.GetNext();
+				while (fileName != "")
+				{
+					if (!dir.CurrentIsDir() && fileName.EndsWith(".txt"))
+					{
+						SetLabel(fileName);
+					}
+					fileName = dir.GetNext();
+				}
+			}
+			else
+			{
+				GD.PrintErr("Failed to open technical directory.");
 			}
 			return;
 		}

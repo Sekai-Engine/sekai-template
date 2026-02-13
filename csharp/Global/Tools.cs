@@ -31,11 +31,11 @@ public partial class Tools : Node
 	public static void SetTexture(Sprite2D sprite, string path)
 	{
 		// path = "background/start_texture", sprite = start_texture
-		var texture = Tools.LoadImage($"./image/{path}.png") as Texture2D
-			?? Tools.LoadImage($"./image/{path}.jpg") as Texture2D;
+		var texture = Tools.LoadImage($"res://image/{path}.png") as Texture2D
+			?? Tools.LoadImage($"res://image/{path}.jpg") as Texture2D;
 		if (texture == null)
 		{
-			GD.PrintErr($"`./image/` Failed to load `{path}.png` or `{path}.jpg`.");
+			GD.PrintErr($"`res://image/` Failed to load `{path}.png` or `{path}.jpg`.");
 		}
 		else
 		{
@@ -84,12 +84,14 @@ public partial class ToolsInit : Node
 		string jsonString = FlowData.jsonString;
 		if (!FlowData.IsBuild)
 		{
-			string filePath = "./script/.init.json";
-			if (!System.IO.File.Exists(filePath))
+			string filePath = "res://script/.init.json";
+			if (!FileAccess.FileExists(filePath))
 			{
 				return defaultValue;
 			}
-			jsonString = System.IO.File.ReadAllText(filePath);
+			using var file = FileAccess.Open(filePath, FileAccess.ModeFlags.Read);
+			if (file == null) return defaultValue;
+			jsonString = file.GetAsText();
 		}
 		using JsonDocument doc = JsonDocument.Parse(jsonString);
 		JsonElement rootElement = doc.RootElement;
