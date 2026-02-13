@@ -37,7 +37,7 @@ public partial class Game : Control
 		if (path == null) {
 			return;
 		}
-		var texture = Tools.LoadImage($"res://image/background/{path}") as Texture2D;
+		var texture = Tools.LoadImage($"./image/background/{path}") as Texture2D;
 		if (texture == null)
 		{
 			GD.PrintErr($"`./image/background/` Failed to load `{path}`.");
@@ -221,17 +221,17 @@ public partial class Game : Control
 		Sprite2D node;
 		if (_dicNode.TryGetValue(anima.type, out node))
 		{
-			node.Texture = (Texture2D)Tools.LoadImage($"res://image/{anima.type}/{anima.name}");
+			node.Texture = (Texture2D)Tools.LoadImage($"./image/{anima.type}/{anima.name}");
 			node.Position = anima.position;
 			node.Scale = new Vector2(anima.scale, anima.scale);
 		}
 		else
 		{
-			PackedScene scene = (PackedScene)ResourceLoader.Load("res://scene/Game/anima.tscn");
+			PackedScene scene = (PackedScene)ResourceLoader.Load("./scene/Game/anima.tscn");
 			node = (Sprite2D)scene.Instantiate();
 			AddChild(node);
-			//node.Texture = (Texture2D)Tools.LoadImage($"res://image/{anima.type}/{anima.name}");
-			string imagePath = $"res://image/{anima.type}/{anima.name}";
+			//node.Texture = (Texture2D)Tools.LoadImage($"./image/{anima.type}/{anima.name}");
+			string imagePath = $"./image/{anima.type}/{anima.name}";
 			Texture2D texture = (Texture2D)Tools.LoadImage(imagePath);
 
 			if (texture != null)

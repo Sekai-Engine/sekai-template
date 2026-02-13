@@ -53,7 +53,7 @@ public partial class Technical : Control
 	{
 		if (FlowData.Techdata.Count == 0)
 		{
-			string[] files = DirAccess.GetFilesAt("res://technical");
+			string[] files = Directory.GetFiles("./technical/");
 			foreach (string file in files)
 			{
 				SetLabel(file);

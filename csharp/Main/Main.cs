@@ -23,7 +23,7 @@ public partial class Main : Node2D
 	{
 		SetJson();
 		Tools.SetTexture(_startTextureNode,"start_texture");
-		_cpuParticles2DNode.Texture = Tools.LoadImage("res://image/particle.png");
+		_cpuParticles2DNode.Texture = Tools.LoadImage("./image/particle.png");
 		_boxContainer.MouseExited += OnBoxContainerMouseExited;
 	}
 
@@ -47,7 +47,7 @@ public partial class Main : Node2D
 		_subTitleNode.AddThemeFontSizeOverride("font_size", subTitleSize);
 		string musicPath = ToolsInit.FindInitValue<string>("start", "music", "stream", "思念,交织于世界彼端.mp3");
 		float musicVolumeDb = ToolsInit.FindInitValue<float>("start", "music", "volume_db", _musicNode.VolumeDb);
-		_musicNode.Stream = Tools.LoadAudio($"res://sounds/{musicPath}");
+		_musicNode.Stream = Tools.LoadAudio($"./sounds/{musicPath}");
 		_musicNode.VolumeDb = musicVolumeDb;
 		_musicNode.Play();
 		Color themeColor = ToolsInit.FindInitColor("main", "theme", "color", _cpuParticles2DNode.Modulate);

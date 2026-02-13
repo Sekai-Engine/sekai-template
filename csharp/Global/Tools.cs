@@ -16,13 +16,24 @@ public partial class Tools : Node
 	/// </summary> 
 	public static Texture2D LoadImage(string absolutePath)
 	{
-		// 始终使用 ResourceLoader 加载资源，确保在编辑器和导出后都能正常工作
-		Texture2D texture = ResourceLoader.Load<Texture2D>(absolutePath);
-		if (texture == null)
+		if (FlowData.IsBuild)
 		{
-			GD.PrintErr($"加载失败: {absolutePath}");
+			return ResourceLoader.Load<Texture2D>(absolutePath);
 		}
-		return texture;
+		Image image = new Image();
+		Error err = image.Load(absolutePath);
+
+		if (err == Error.Ok)
+		{
+			ImageTexture texture = new ImageTexture();
+			texture.SetImage(image);
+			return texture;
+		}
+		else
+		{
+			GD.PrintErr($"加载失败 ({err}): {absolutePath}");
+			return null;
+		}
 	}
 
 
@@ -31,23 +42,70 @@ public partial class Tools : Node
 	/// </summary>
 	public static AudioStream LoadAudio(string absolutePath)
 	{
-		// 始终使用 ResourceLoader 加载资源，确保在编辑器和导出后都能正常工作
-		AudioStream audioStream = ResourceLoader.Load<AudioStream>(absolutePath);
-		if (audioStream == null)
+		if (FlowData.IsBuild)
 		{
-			GD.PrintErr($"加载失败: {absolutePath}");
+			return ResourceLoader.Load<AudioStream>(absolutePath);
 		}
+		string extension = System.IO.Path.GetExtension(absolutePath).ToLower();
+		switch (extension)
+		{
+			case ".wav":
+				return LoadWavFile(absolutePath);
+			case ".ogg":
+				return LoadOggFile(absolutePath);
+			case ".mp3":
+				return LoadMp3File(absolutePath);
+			default:
+				return null;
+		}
+	}
+
+	private static AudioStreamWav LoadWavFile(string path)
+	{
+		var audioStream = new AudioStreamWav();
+
+		using var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
+		if (file == null)
+		{
+			return null;
+		}
+
+		audioStream.Data = file.GetBuffer((long)file.GetLength());
+		audioStream.Format = AudioStreamWav.FormatEnum.Format16Bits; // 根据实际格式调整
+		audioStream.Stereo = true; // 根据实际调整
+		audioStream.MixRate = 44100; // 根据实际调整
+
+		return audioStream;
+	}
+
+	private static AudioStreamOggVorbis LoadOggFile(string path)
+	{
+		var audioStream = AudioStreamOggVorbis.LoadFromFile(path);
+		return audioStream;
+	}
+
+	private static AudioStreamMP3 LoadMp3File(string path)
+	{
+		var audioStream = new AudioStreamMP3();
+
+		using var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
+		if (file == null)
+		{
+			return null;
+		}
+
+		audioStream.Data = file.GetBuffer((long)file.GetLength());
 		return audioStream;
 	}
 
 	public static void SetTexture(Sprite2D sprite, string path)
 	{
 		// path = "background/start_texture", sprite = start_texture
-		var texture = Tools.LoadImage($"res://image/{path}.png") as Texture2D
-			?? Tools.LoadImage($"res://image/{path}.jpg") as Texture2D;
+		var texture = Tools.LoadImage($"./image/{path}.png") as Texture2D
+			?? Tools.LoadImage($"./image/{path}.jpg") as Texture2D;
 		if (texture == null)
 		{
-			GD.PrintErr($"`res://image/` Failed to load `{path}.png` or `{path}.jpg`.");
+			GD.PrintErr($"`./image/` Failed to load `{path}.png` or `{path}.jpg`.");
 		}
 		else
 		{
@@ -68,12 +126,12 @@ public partial class Tools : Node
 	/*
 	   public static void SetTexture(TextureRect textureRect, string path)
 	   {
-	   var texture = Tools.LoadImage($"res://image/{path}.png") as Texture2D
-	   ?? Tools.LoadImage($"res://image/{path}.jpg") as Texture2D;
+	   var texture = Tools.LoadImage($"./image/{path}.png") as Texture2D
+	   ?? Tools.LoadImage($"./image/{path}.jpg") as Texture2D;
 
 	   if (texture == null)
 	   {
-	   GD.PrintErr($"`res://image/` Failed to load `{path}.png` or `{path}.jpg`.");
+	   GD.PrintErr($"`./image/` Failed to load `{path}.png` or `{path}.jpg`.");
 	   }
 	   else
 	   {
@@ -97,19 +155,11 @@ public partial class ToolsInit : Node
 		if (!FlowData.IsBuild)
 		{
 			string filePath = "./script/.init.json";
-			try
-			{
-				using FileAccess file = FileAccess.Open(filePath, FileAccess.ModeFlags.Read);
-				if (file == null)
-				{
-					return defaultValue;
-				}
-				jsonString = file.GetAsText();
-			}
-			catch
+			if (!System.IO.File.Exists(filePath))
 			{
 				return defaultValue;
 			}
+			jsonString = System.IO.File.ReadAllText(filePath);
 		}
 		using JsonDocument doc = JsonDocument.Parse(jsonString);
 		JsonElement rootElement = doc.RootElement;
