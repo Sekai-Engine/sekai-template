@@ -5,6 +5,10 @@ public partial class MainControl : CanvasLayer
 {
 	Tween tween;
 	ShaderMaterial shaderMaterial;
+
+	private bool _startGame;
+
+	[Export]
 	private Keys _keysScene;
 	
 	[Export]
@@ -34,7 +38,7 @@ public partial class MainControl : CanvasLayer
 
 		SetJson();
 
-		_keysScene = GetNode<Keys>("Keys");
+		_startGame = true;
 		_keysScene.BoxContainerNode.Hide();
 		_keysScene.BackNode.Pressed += InputKey;
 
@@ -57,14 +61,14 @@ public partial class MainControl : CanvasLayer
 	{
 		if (@event is InputEventKey keyEvent)
 		{
-			if (keyEvent.Pressed)
+			if (keyEvent.Pressed && _startGame)
 			{
 				InputKey();
 			}
 		}
 		else if (@event is InputEventMouseButton mouseButtonEvent)
 		{
-			if (mouseButtonEvent.Pressed)
+			if (mouseButtonEvent.Pressed && _startGame)
 			{
 				InputKey();
 			}
@@ -79,8 +83,8 @@ public partial class MainControl : CanvasLayer
 		shaderMaterial.SetShaderParameter("min_alpha", 0.0f);
 		shaderMaterial.SetShaderParameter("max_alpha", 0.0f);
 		tween.TweenProperty(Menu, "position", new Vector2(0, 0), 0.6f);
-		ProcessMode = Node.ProcessModeEnum.Disabled;
-		//_start.Hide();
+		//ProcessMode = Node.ProcessModeEnum.Disabled;
+		_startGame = false;
 	}
 
 	// 开始游戏
