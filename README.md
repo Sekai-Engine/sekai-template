@@ -8,17 +8,17 @@ Sekai-template is developed based on godot-mono and serves as the packaging temp
 
 ## Usage
 
-### Low-Code Development
+### Direct Development
 
 No environment setup is required. Simply download the [release](https://github.com/Sekai-Engine/template/releases) to start development immediately.
 
-### Deep Integration
+### Embedded Godot Integration
 
-You can clone the repository directly and import it into godot-mono for further development:
+Or you can clone the repository directly and import it into godot-mono for further development:
 
 ```bash
-git clone https://github.com/Sekai-Engine/template.git
-cd template
+git clone --depth 1 -b stable https://github.com/Sekai-Engine/sekai-template.git
+cd sekai-template
 ```
 
 Before writing scripts for the first time, you need to initialize the state and compiled language using the slang interpreter:

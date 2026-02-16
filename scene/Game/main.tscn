@@ -50,10 +50,12 @@ scale_amount_curve = SubResource("Curve_tgr4c")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 max_polyphony = 2
+bus = &"Music"
 
 [node name="Sounds" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_p7wv6")
 max_polyphony = 2
+bus = &"Sounds"
 
 [node name="Menu" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_8wlu8")
@@ -101,8 +103,9 @@ size_flags_vertical = 10
 theme = ExtResource("4_3mxyr")
 text = "退出游戏"
 
-[node name="MainControl" type="CanvasLayer" parent="." node_paths=PackedStringArray("_gameStartNode", "_technicalNode", "_settingsNode", "_exitNode", "Menu", "_start")]
+[node name="MainControl" type="CanvasLayer" parent="." node_paths=PackedStringArray("_keysScene", "_gameStartNode", "_technicalNode", "_settingsNode", "_exitNode", "Menu", "_start")]
 script = ExtResource("5_b5f6u")
+_keysScene = NodePath("Keys")
 _gameStartNode = NodePath("../Menu/BoxContainer/GameStart")
 _technicalNode = NodePath("../Menu/BoxContainer/Technical")
 _settingsNode = NodePath("../Menu/BoxContainer/Settings")
@@ -110,16 +113,6 @@ _exitNode = NodePath("../Menu/BoxContainer/Exit")
 GameScenePath = "res://scene/Game/game.tscn"
 Menu = NodePath("../Menu")
 _start = NodePath("Start")
-
-[node name="Start" type="Label" parent="MainControl"]
-material = SubResource("ShaderMaterial_wb1fm")
-offset_left = 653.0
-offset_top = 728.0
-offset_right = 885.0
-offset_bottom = 764.0
-theme = ExtResource("4_3mxyr")
-theme_override_colors/font_color = Color(0.7019608, 0.827451, 1, 1)
-text = "-按下任意键开始游戏-"
 
 [node name="Title" type="Control" parent="MainControl"]
 layout_mode = 3
@@ -155,5 +148,14 @@ theme_override_font_sizes/font_size = 30
 text = "让世界成为你的舞台"
 horizontal_alignment = 1
 
+[node name="Start" type="Label" parent="MainControl"]
+material = SubResource("ShaderMaterial_wb1fm")
+offset_left = 653.0
+offset_top = 728.0
+offset_right = 885.0
+offset_bottom = 764.0
+theme = ExtResource("4_3mxyr")
+theme_override_colors/font_color = Color(0.7019608, 0.827451, 1, 1)
+text = "-按下任意键开始游戏-"
+
 [node name="Keys" parent="MainControl" instance=ExtResource("7_8y3qp")]
-visible = false

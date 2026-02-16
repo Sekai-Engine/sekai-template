@@ -25,6 +25,7 @@ centered = false
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 autoplay = true
+bus = &"Music"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
