@@ -49,15 +49,18 @@ _gameScene = NodePath("..")
 [node name="Dubbing" type="AudioStreamPlayer" parent="."]
 autoplay = true
 max_polyphony = 2
+bus = &"Game"
 
 [node name="Sounds" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_nu56y")
 volume_db = 11.45
 max_polyphony = 2
+bus = &"Sounds"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 autoplay = true
 max_polyphony = 2
+bus = &"Music"
 
 [connection signal="StartGame" from="Bottom" to="." method="_on_bottom_start_game"]
 [connection signal="StartGame" from="Font" to="." method="_on_font_start_game"]

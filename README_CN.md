@@ -8,17 +8,17 @@ Sekai-template基于godot-mono开发，是Sekai引擎的打包模板，通过嵌
 
 ## 使用
 
-### 低代码开发
+### 直接开发
 
 无需配置任何环境，直接下载[发行版](https://atomgit.com/Sekai-Engine/template/releases)进行开发。
 
-### 深度嵌入
+### 嵌入godot开发
 
-您可以直接克隆代码, 并导入到godot-mono中接着开发:
+您也可以直接克隆代码, 并导入到godot-mono中接着开发:
 
 ```bash
-git clone https://atomgit.com/Sekai-Engine/template.git
-cd template
+git clone --depth 1 -b stable https://atomgit.com/Sekai-Engine/sekai-template.git
+cd sekai-template
 ```
 
 首次开始编写脚本前需要使用slang解释器将状态与编译语言进行初始化:

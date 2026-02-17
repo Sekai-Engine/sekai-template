@@ -32,14 +32,12 @@ public partial class Settings : Control
 
 	private void OnSoundsVolumeChanged(double value)
 	{
-		GD.Print($"Volume changed to: {value}");
 		int busIndex = AudioServer.GetBusIndex("Sounds");
 		AudioServer.SetBusVolumeDb(busIndex, (float)Mathf.LinearToDb(value));
 	}
 
 	private void OnMusicVolumeChanged(double value)
 	{
-		GD.Print($"Volume changed to: {value}");
 		int busIndex = AudioServer.GetBusIndex("Music");
 		AudioServer.SetBusVolumeDb(busIndex, (float)Mathf.LinearToDb(value));
 	}
@@ -47,14 +45,13 @@ public partial class Settings : Control
 
 	private void OnGameVolumeChanged(double value)
 	{
-		GD.Print($"Volume changed to: {value}");
 		int busIndex = AudioServer.GetBusIndex("Game");
 		AudioServer.SetBusVolumeDb(busIndex, (float)Mathf.LinearToDb(value));
 	}
 
 	private void OnSpeedVolumeChanged(double value)
 	{
-		GD.Print($"Speed changed to: {value}");
+		Global.text_speed = (float)value;
 	}
 
 	private void OnFriendlyModeToggled(bool toggled)
@@ -69,6 +66,7 @@ public partial class Settings : Control
 
 	private void OnBackMainButtonPressed()
 	{
+		Global.KeysState = null;
 		GetTree().ChangeSceneToFile("res://scene/Game/main.tscn");	
 	}
 }
