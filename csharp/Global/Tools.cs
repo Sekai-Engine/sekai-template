@@ -154,7 +154,7 @@ public partial class ToolsInit : Node
 		string jsonString = FlowData.jsonString;
 		if (!FlowData.IsBuild)
 		{
-			string filePath = "./script/.init.json";
+			string filePath = "./sekai.project";
 			if (!System.IO.File.Exists(filePath))
 			{
 				return defaultValue;

@@ -24,7 +24,7 @@
 	},
 	"game": {
 		"script": {
-			"start": "start.txt"
+			"start": "start.se"
 		}	
 	},
 	"end": {

@@ -82,7 +82,7 @@ public partial class Global : Node
 		// window size是否会改变
 		window_width = GetWindow().Size.X;
 		window_height = GetWindow().Size.Y;
-		string startPath = ToolsInit.FindInitValue<string>("game", "script", "start", "start.txt");
+		string startPath = ToolsInit.FindInitValue<string>("game", "script", "start", "start.se");
 
 		datas = RunFile(startPath);
 	}
@@ -145,7 +145,7 @@ public partial class Global : Node
 		{
 			try
 			{
-				using (StreamReader reader = new StreamReader($"./technical/{fileName}.txt"))
+				using (StreamReader reader = new StreamReader($"./technical/{fileName}.se"))
 				{
 					string textdata = reader.ReadToEnd();
 					technicalScene.TextNode.Text = textdata;
@@ -160,7 +160,7 @@ public partial class Global : Node
 		{
 			try
 			{
-				string textdata = FlowData.Techdata.FirstOrDefault(x => x.file == $"{fileName}.txt").data;
+				string textdata = FlowData.Techdata.FirstOrDefault(x => x.file == $"{fileName}.se").data;
 				technicalScene.TextNode.Text = textdata;
 			}
 			catch
