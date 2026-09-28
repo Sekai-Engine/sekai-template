@@ -22,7 +22,6 @@ mono_crash.*.json
 *.png~
 *.jpg~
 *.ion~
-bin/
 
 # note file ignores
 .obsidian/

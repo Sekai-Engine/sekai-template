@@ -9,17 +9,23 @@
 			"text": "SeKai",
 			"font_color": "rgba(0.04, 0.39, 0.55, 1.00)",
 			"font_outline_color": "rgba(1.00, 1.00, 1.00, 1.00)",
-			"font_size": 120
+			"font_size": 120,
+			"font": "res://sekai/font/ChironGoRoundTC-350N.ttf"
 		},
 		"subtitle": {
 			"text": "让世界成为你的舞台",
 			"font_color": "rgba(0.54, 0.65, 0.64, 1.00)",
 			"font_outline_color": "rgba(1.00, 1.00, 1.00, 1.00)",
-			"font_size": 30
+			"font_size": 30,
+			"font": "res://sekai/font/ChironGoRoundTC-350N.ttf"
 		},
 		"music": {
 			"stream": "思念,交织于世界彼端.mp3",
 			"volume_db": 0.0
+		},
+		"image": {
+			"texture": "start_texture.png",
+			"particles": "./image/particle.png"
 		}
 	},
 	"game": {
@@ -35,6 +41,9 @@
 		"label": {
 			"text": "Sekai引擎\n让世界成为你的舞台",
 			"speed": 0.1
+		},
+		"image": {
+			"texture": "start_texture.png"
 		}
 	}
 }

@@ -21,10 +21,10 @@ config/icon="uid://j4t0kg0bejd4"
 
 [autoload]
 
-FlowData="*res://csharp/Global/FlowData.cs"
-Global="*res://csharp/Global/Global.cs"
-Tools="*res://csharp/Global/Tools.cs"
-ezapi="*res://gdscript/Global/ezapi.gd"
+FlowData="*res://sekai/csharp/Global/FlowData.cs"
+Global="*res://sekai/csharp/Global/Global.cs"
+Tools="*res://sekai/csharp/Global/Tools.cs"
+ezapi="*res://sekai/gdscript/Global/ezapi.gd"
 
 [display]
 
